@@ -48,7 +48,7 @@ fn main() {
     }
 
     println!("\n--- RESUMEN DE LA SESIÓN ---");
-    println!("Has validado un total de {} páginas.", historial_tiempos.len());
+    println!("Has validado la cantidad de {} páginas.", historial_tiempos.len());
 
     let suma: f32 = historial_tiempos.iter().sum();
     let cantidad = historial_tiempos.len();
@@ -56,5 +56,5 @@ fn main() {
     // Calculamos el promedio. OJO! Hay que convertir 'cantidad' a decimal con 'as f32'
     let promedio = suma / cantidad as f32;
 
-    println!("El promedio de carga de hoy fue: {:.2} segundos", promedio);
+    println!("El promedio de carga de hoy fue: {:.2} segundos por página.", promedio);
 }
