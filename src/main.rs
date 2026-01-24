@@ -38,13 +38,8 @@ fn main() {
         println!("Dato guardado. Llevas {} análisis realizados.", historial_tiempos.len());
 
         // --- 3. LÓGICA DE DECISIÓN ---
-        if tiempo <= 2.0 {
-            println!("¡Excelente! Tu sitio es muy accesible.");
-        } else if tiempo <= 5.0 {
-            println!("⚠️ Está bien, pero podría mejorar.");
-        } else {
-            println!("🐢 ¡Cuidado! Es demasiado lento.");
-        }
+        let mensaje: String = clasificar_velocidad(tiempo);
+        println!("Resultado: {mensaje}");
     }
 
     println!("\n--- RESUMEN DE LA SESIÓN ---");
@@ -57,4 +52,17 @@ fn main() {
     let promedio = suma / cantidad as f32;
 
     println!("El promedio de carga de hoy fue: {:.2} segundos por página.", promedio);
+}
+
+// 'fn' para declarar función
+// 'tiempo: f32' es lo que recibe
+// '-> String' es lo que devuelve al final
+fn clasificar_velocidad(tiempo: f32) -> String {
+    if tiempo <= 2.0 {
+        String::from("🚀 Excelente")
+    } else if tiempo <= 5.0 {
+        String::from("⚠️ Aceptable")
+    } else {
+        String::from("🐢 Muy lento")
+    }
 }
