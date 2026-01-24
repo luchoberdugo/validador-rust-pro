@@ -4,6 +4,7 @@ use std::io;
 fn main() {
     // Creamos un vector para almacenar los tiempos que vamos a medir
     let mut historial_tiempos: Vec<f32> = Vec::new();
+    let mut errores: i32 = 0;
 
     // El bucle "loop" se repite para siempre hasta que lo detengas
     loop {
@@ -29,6 +30,7 @@ fn main() {
         let tiempo: f32 = match entrada.trim().parse() {
             Ok(num) => num, // Si todo salió bien, entonces guardamos el número en 'tiempo'
             Err(_) => {
+                errores += 1;
                 println!("⚠️ ¡Error! Debes ingresar un número (ejemplo: 2.5) o 'salir'.");
                 continue; // Vuleve al inicio del loop inmediatamente
             }
@@ -52,6 +54,7 @@ fn main() {
     let promedio = suma / cantidad as f32;
 
     println!("El promedio de carga de hoy fue: {:.2} segundos por página.", promedio);
+    println!("Total errores de entrada: {}", errores);
 }
 
 // 'fn' para declarar función
