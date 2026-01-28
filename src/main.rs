@@ -1,5 +1,15 @@
 // Importamos la librería que usamos para capturar los datos del usuario
 use std::io;
+// use std::fs::File;
+use std::fs::OpenOptions;
+use std::io::Write;
+
+#[derive(Debug)] // Esto permite imprimir en pantalla usando {:?}
+struct Reporte {
+    tiempos: Vec<f32>,
+    total_errores: i32,
+    promedio: f32,
+}
 
 fn main() {
     // Creamos un vector para almacenar los tiempos que vamos a medir
@@ -55,6 +65,25 @@ fn main() {
 
     println!("El promedio de carga de hoy fue: {:.2} segundos por página.", promedio);
     println!("Total errores de entrada: {}", errores);
+
+    let mi_reporte = Reporte {
+        tiempos: historial_tiempos.clone(),
+        total_errores: errores,
+        promedio: promedio,
+    };
+
+    let mut archivo = OpenOptions::new()
+        .append(true)
+        .create(true)
+        .open("salida/historial_rendimiento.txt")
+        .expect("No se pudo abrir el archivo de historial");
+
+    // Añadimos una marca de separación para que el historial sea legible
+    write!(archivo, "\n--- NUEVA SESIÓN ---\n").unwrap();
+    write!(archivo, "{:#?}\n", mi_reporte).unwrap();
+    write!(archivo, "---------------------\n").unwrap();
+
+    println!("✅ Datos añadidos al historial.");
 }
 
 // 'fn' para declarar función
