@@ -2,7 +2,6 @@
 use std::io;
 use crate::reportes::Reporte;
 
-
 pub fn pedir_entrada_de_usuario() -> Reporte {
     // Creamos un vector para almacenar los tiempos que vamos a medir
     let mut historial_tiempos: Vec<f32> = Vec::new();
@@ -48,9 +47,12 @@ pub fn pedir_entrada_de_usuario() -> Reporte {
             historial_tiempos.iter().sum::<f32>() / historial_tiempos.len() as f32
         };
 
+        let categoria = crate::calculos::clasificar_velocidad(promedio);
+
         Reporte {
             tiempos: historial_tiempos,
             total_errores: errores,
             promedio,
+            categoria
         }
     }
